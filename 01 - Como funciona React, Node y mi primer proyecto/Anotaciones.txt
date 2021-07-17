@@ -1,0 +1,56 @@
+# Como funciona el Virtual DOM de React ?
+
+React JS es una librería que se compone de más librerías para crear una APP
+Se considera una herramienta poderosa por:
+- Virtual DOM (DOM: Jerarquía de elementos que tengo en mi APP)
+- Reconciliación 
+
+Los cambios en el DOM son caros, antes estar cambiando era "pesado" ya que ante un cambio rendirazaba todo el DOM ->
+React para solucionar esto crea el "Virtual DOM", que es una copia del DOM a tiempo real que almacena en memoria.
+Me permite saber que componente en sí cambio y renderiza eso solo (reconciliación), aumentando la velocidad al renderizar y bajar la carga
+
+Ejecuta un algoritmo "diffing" (indentifica lo que cambió) y luego una reconciliación.
+
+PREGUNTA DE ENTREVISTA !!!!
+
+# Node.js
+
+Node.js es un entorno de ejecución de Javascript que le permite al código JS ser ejecutado en nuestra computadora.
+
+-2009 Se genera para poder construir servidores/APIS. 
+-Permite usar JS para el backend. 
+-Permite JS para el back y front.
+
+Se crea este motor sacando el que ya estaba creado para el front y modificandolo.
+Es decir, le puedo dar un archivo JS a node y lo ejecutará.
+También podemos darle recursos de nuestra computadora (Network, IO, etc)
+
+Es una librería que me permite además añadir librería ->
+Node utiliza NPM (Node Package Manager) para esto. npmjs.com para ver todas las librerías
+
+Para instalar node.js debemos ingresar a nodejs.org/en/ y descargar LTS (estable)
+NVM permite alternar entre versiones de Node.js
+Para saber si está intalado debemos ejecutar node -v o node --version
+
+# Crear una aplicación React utilizando el CLI 
+
+CLI -> Command-Line Interface
+Permite generar por línea de comandos la base de mis aplicaciones
+
+React tiene su propia CLI -> create-react-app
+
+Para instalar create-react-app utilizamos Node
+- npm install -g create-react-app (lo instala en el computador de forma global)
+O podemos utilizar npx que es para correrlo instalandolo "temporalmente" en nuestro computador, especificando una carpeta/destino/nombre del proyecto
+Me dirijo a la ruta donde se creará la aplicación (carpeta padre) y ejecuto el siguiente comando:
+- npx create-react-app NOMBREPROYECTO
+
+Si ya lo instalé solo utilizaria ->
+create-react-app NOMBREPROYECTO
+
+Para correr mi proyecto me dirijo a la carpeta del proyecto
+cd nombreDelProyecto
+Y ejecuto el comando (parado en la carpeta de mi proyecto) ->
+npm start
+Correrá un servidor localhost con el puerto por defecto 3000 de Node.js
+En src/app.js se encuentra ubicado el componente que se muestra al crear la aplicación, puede/debe ser modificado.
