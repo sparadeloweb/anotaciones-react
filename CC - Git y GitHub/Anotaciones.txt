@@ -1,0 +1,64 @@
+Git -> Herramienta para crear código colaborativo, desarrollada por el mismo creador de Linux.
+Su función está en subir cambios realizados en un archivo a un mismo lugar donde podrá acceder otro desarrollador y bajar estos cambios.
+
+Se ejecuta en la terminal de nuestro sistema operativo.
+
+Para descargar Git ingreso a: http://git-scm.com/downloads
+
+Para saber si tengo Git instalado ejecuto en consola: git
+
+GitHub -> Es un Kernel (Núcleo) que corre sobre Git
+Existen otros repositorios, como GitLab o BitBucket
+
+--- Comandos ---
+
+-> Si el proyecto no incluye un inicio de Git (React si lo incluye), lo debo iniciar en la carpeta a subir utilizando
+git init (Creará una carpeta .git que es invisible)
+
+-> Para saber que archivos tengo modificados y/o no tengo agregados a mi Git utilizo
+git status
+
+-> Para agregar cambios utilizo
+git add:
+- git add . Agrega todos los archivos
+- git add RUTADELARCHIVO (Se puede ver utilizando git status) Agrega archivo en específico
+
+Si agrego un archivo, al ejecutar git status se mostrará en verde y no en rojo
+
+-> Para "firmar" el/los cambio/s o hacer un commit utilizo
+git commit -m "Nombre del commit"
+
+-> Para ver los últimos commit utilizo
+git log
+Mostrará si el/los commit/s
+
+-> Si es la primera vez que agregamos el repositorio debemos usar
+git add remote origin LINK .git
+
+-> Para generar una clave SSH (permite autenticar en un servidor sin la necesidad de estar ingresando contraseña y usuario todo el tiempo) sigo el siguiente tutorial
+https://docs.github.com/es/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
+
+Git está basado en ramas, es decir: puedo trabajar sobre otra rama (una copia) para no alterar el proyecto principal, donde luego debo ejecutar el comando pull request para pasarlos
+
+-> Para ver las ramas de un proyecto utilizo
+git branch -a (Verde la actual y en rojo todas las ramas)
+
+-> Para crear una rama en el proyecto
+git branch NOMBREDELANUEVARAMA
+
+-> Para cambiar de rama
+git checkout NOMBREDELARAMA
+
+-> Para eliminar una rama
+git branch -d NOMBREDELARAMA
+
+-> Para cambiarle el nombre a una rama
+git branch -m NUEVONOMBREPARALARAMAACTUAL
+
+-> Para subir los cambios a la rama en la cual estoy ubicado utilizo
+git push -u origin RAMA
+
+Si no es la primera vez que voy a subir utilizo git push origin main
+
+-> Para eliminar un commit subido utilizo
+git revert HASHDELCOMMIT
