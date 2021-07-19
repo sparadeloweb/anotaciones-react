@@ -30,7 +30,7 @@ git commit -m "Nombre del commit"
 
 -> Para ver los últimos commit utilizo
 git log
-Mostrará si el/los commit/s
+Mostrará si el/los commit/s están subidos o por subir
 
 -> Si es la primera vez que agregamos el repositorio debemos usar
 git add remote origin LINK .git
