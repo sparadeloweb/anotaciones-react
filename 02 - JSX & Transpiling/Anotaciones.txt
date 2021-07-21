@@ -1,0 +1,140 @@
+d# Sugar Syntax
+
+Refiere a la sintaxis agregada a un lenguaje de programación con el objetivo de hacer más fácil y eficiente su utilización.
+i = i + 1 // Sintaxis no práctica
+i++ // Sintaxis práctica
+
+Los lenguajes suelen evolucionar en la manera de ser escritos, sea por críticas o mejoras que solicita la comunidad, aumentar la adoptabilidad o por la dificultad de implementar patrones de diseños que son fáciles en otro lenguaje
+
+Implementando los patrones y la sintaxis correcta se mejorará la legibilidad y el pragmatismo (la práctica)
+
+const condition = true;
+let result = null;
+if(condition) {
+    result = 'correcto';
+} else {
+    result = 'incorrecto';
+}
+console.log(`El resultado es: ${result}`);
+
+Puede ser cambiado por una sentencia utilizando el operador ternario (compuesto de 3 partes)
+
+const condition = true;
+console.log(`El resultado es: ${condition ? 'Correcto' : 'Incorrecto'}`); // El codigo se vuelve mucho más eficiente y más facil de leer
+
+Operador ternario = CONDICION ? QUE_RETORNA_SI_ES_TRUE : QUE_RETORNA_SI_ES_FALSE;
+
+OTROS EJEMPLOS ->
+
+_Spread Operator: 
+
+const gato = {
+    nombre: 'Felipe',
+    edad: 15,
+}
+
+const gato2 = { ...gato } // Los 3 puntos seguido de la constante le indican a JS que genere una copia del objeto gato con todo sus valores
+// gato2 por el momento será igual a gato aunque sean independientes entre sí
+
+gato2.nombre = 'José'; //
+
+const gatos = [gato, gato2];
+[
+    {
+        nombre: 'Felipe,
+        edad: 15
+    },
+    {
+        nombre: 'José',
+        edad: 15,
+    }
+] // Esta será su salida/output
+
+Si lo definiera de la siguiente forma
+const gato2 = gato; 
+Al cambiar una propiedad de gato2 también afectaría a gato, no se vuelven independientes
+
+_Propiedades Dinámicas:
+
+Son propiedades de objetos que, como su nombre lo indica, esperan que se generen en conjunto a una variable, respuesta del servidor, etc. Se definen non con el nombre de su propiedad si no entre corchetes []
+
+const objUsuarios = {};
+const usuarios = ["Jon", "Irma", "Miguel", "Kala", "Kenai"];
+
+usuarios.forEach((usuarios, index) => objUsuarios[`id_${index}`] = usuario); // Agrega por cada usuario al objeto de objUsuarios un elemento con un custom index dado por mi
+
+_Deep Matching
+
+var {a: val} = {a: 2};
+
+_ Asignación en desestructuración
+
+var [a = 1, b = 2, c = 3, d] = [4, 5];
+
+# Poyfills y la retrocompatibilidad
+
+Cuando desarrollamos debemos tener en cuenta la distribución que tiene hoy el mundo y el target de usuarios
+Puedo utilizar https://caniuse.com para saber que navegador es compatible con cierta herramienta
+
+Los polyfills son herramientas que nos permiten hacer nuestra aplicación compatible con navegadores antiguos que no admiten de forma nativa nuevas funcionalidades
+
+Un ejemplo de polyfill es core-js https://github.com/zloirock/core-js
+
+# Bundling con webpack
+
+Webpack es un empaquetador de módulos que nace a finales de 2012, utilizado muy a menudo en el desarrollo Front-End
+Transforma los modulos con dependencias a recursos estáticos -> Un módulo JS puede depender de otros módulos JS, con imágenes en diferentes formatos.. o estar utilizando algún preprocesador de CSS como SASS o LESS
+Recoge estos módulos y los transforma en recursos que entiende el navegador
+
+El equipo de desarrollo de React se encarga de mantener las configuraciones actualizadas, aunque podemos modificarlas realizando un eject (acción permanente que permite tener control mas específico del bundling)
+
+# Transpiling
+
+Es el proceso de convertir código escrito en un lenguaje a su representación en otro. Suelen simplificar o extender la escritura del lenguaje original. 
+Su proceso es similar conceptualmente a pollyfilling 
+Logran niveles de simetricidad y una interacción o simbiosis con el lenguaje original 
+
+
+-- JSX --
+Javascript XML
+
+Es una extensión de sintaxis de Javascript que se parece a HTML, permite hacer llamadas a funciones y a construcción de objetos. No es ni una cadena de caracteres ni HTML.
+Es una extensión de JS y no de React, por lo que no es obligatorio usarlo pero si es lo que se recomienda
+
+JSX se transforma en código Javascript
+
+<div className="active">Hola Coders!</div> == React.createElement('div', {className: 'active'}, 'Hola Coders');
+
+JSX permite utilizar estilos inline, la conversión en borrar el guion de la regla de css y la siguiente palabra deberá comenzar con mayúscula
+
+let styles = {
+    borderColor: '#999' // border-color por borderColor
+}
+
+const jsx = (
+    <div style={styles}>
+        Hola Coders!
+    </div>
+)
+
+O puedo utilizar ->
+
+const jsx = () => <div style={{marginLeft: 15}} />Hola Coders!</div>;
+// Utilizo doble {} y no necesito asignar la unidad PX
+
+Regla en JSX, si el elemento tiene hijos se debe cerrar la etiqueta, si no se debe autocerrar
+CH: <img src=""><h1>Hola</h1></img>
+SH: <img src=""/>
+
+Regla en JSX, no puedo utilizar la palabra class dentro de un elemento JSX ya que está se encuentra reservada, utilizo className
+return (
+    <h1 className='mi-texto'></h1>
+);
+
+Para los eventos también se utiliza camelCase
+return (
+    <h1 onClick="tatata()"></h1>
+);
+
+Para utilizar JSX en nuestra aplicaicón debemos tener instalado Webpack, que en el caso de una app React ya viene incluido.
+
