@@ -1,12 +1,21 @@
-d# Sugar Syntax
+# Sugar Syntax
 
 Refiere a la sintaxis agregada a un lenguaje de programación con el objetivo de hacer más fácil y eficiente su utilización.
 i = i + 1 // Sintaxis no práctica
 i++ // Sintaxis práctica
 
++ Mas amigable
++ Mas funcionalidad
++ Comprension de lectura mejorada
+
 Los lenguajes suelen evolucionar en la manera de ser escritos, sea por críticas o mejoras que solicita la comunidad, aumentar la adoptabilidad o por la dificultad de implementar patrones de diseños que son fáciles en otro lenguaje
 
 Implementando los patrones y la sintaxis correcta se mejorará la legibilidad y el pragmatismo (la práctica)
+
+ECMA -> Se encarga de decidir que se implementará en nuevas versiones
+Incorporaron las clases (simulandolo por detrás) para atraer a la comunidad de la POO
+
+Patrones de diseño --> Es una solución a un problema que ya solucionó alguien
 
 const condition = true;
 let result = null;
@@ -27,6 +36,13 @@ Operador ternario = CONDICION ? QUE_RETORNA_SI_ES_TRUE : QUE_RETORNA_SI_ES_FALSE
 OTROS EJEMPLOS ->
 
 _Spread Operator: 
+
+Saca las propiedades de un objeto o array para crear uno nuevo
+
+... -> Trae TODAS las propiedades de un objeto o array a otro objeto
+Si en un objeto pongo dos spread operators y coincide una propiedad, la ultima asignada tomará el valor
+
+Puedo concatenar ...
 
 const gato = {
     nombre: 'Felipe',
@@ -54,6 +70,8 @@ Si lo definiera de la siguiente forma
 const gato2 = gato; 
 Al cambiar una propiedad de gato2 también afectaría a gato, no se vuelven independientes
 
+En una funcion puedo asignarle al momento de definirla un spread operator junto al parametro, luego puedo trabajarlos con un .reduce()
+
 _Propiedades Dinámicas:
 
 Son propiedades de objetos que, como su nombre lo indica, esperan que se generen en conjunto a una variable, respuesta del servidor, etc. Se definen non con el nombre de su propiedad si no entre corchetes []
@@ -63,6 +81,11 @@ const usuarios = ["Jon", "Irma", "Miguel", "Kala", "Kenai"];
 
 usuarios.forEach((usuarios, index) => objUsuarios[`id_${index}`] = usuario); // Agrega por cada usuario al objeto de objUsuarios un elemento con un custom index dado por mi
 
+const id = 420;
+const objeto = {
+	 [id]: 'id' 
+};
+
 _Deep Matching
 
 var {a: val} = {a: 2};
@@ -71,6 +94,37 @@ _ Asignación en desestructuración
 
 var [a = 1, b = 2, c = 3, d] = [4, 5];
 
+const carro = {
+	vidrios: 4,
+	puertas: 5,
+	llantas: 8,
+	matricula: "123 ABC",
+	color: undefined // Si no existe o es undefined tomará el valor por defecto asignado, null si es tomado como valor
+}
+
+const {color = 'Azul', matricula, llantas} = carro;
+
+Declara las let en el scope a ejecutar la desestructuración
+
+Puedo asignarles otro nombre
+
+{color: colorDelCarroA, matricula, llantas} = carro;
+
+Dentro de una función puedo desestructurar en los parámetros
+function reciboCarro({llanta}){
+	console.log(llanta);
+}
+
+Con los arreglos funciona similar solo que en vez de traer por el nombre de la propiedad traigo por posicioón
+
+const array = [1, 5, 3, 4];
+
+const [numero1, numero2] = array;
+
+console.log(numero1, numero2); => 1, 5 
+
+Puedo asignarles un valor por defecto también
+
 # Poyfills y la retrocompatibilidad
 
 Cuando desarrollamos debemos tener en cuenta la distribución que tiene hoy el mundo y el target de usuarios
@@ -78,7 +132,7 @@ Puedo utilizar https://caniuse.com para saber que navegador es compatible con ci
 
 Los polyfills son herramientas que nos permiten hacer nuestra aplicación compatible con navegadores antiguos que no admiten de forma nativa nuevas funcionalidades
 
-Un ejemplo de polyfill es core-js https://github.com/zloirock/core-js
+Un ejemplo de polyfill es core-js https://github.com/zloirock/core-js o babel
 
 # Bundling con webpack
 
@@ -133,7 +187,7 @@ return (
 
 Para los eventos también se utiliza camelCase
 return (
-    <h1 onClick="tatata()"></h1>
+    <h1 onClick="tatata()"></h1> // Syntax Events
 );
 
 Para utilizar JSX en nuestra aplicaicón debemos tener instalado Webpack, que en el caso de una app React ya viene incluido.
