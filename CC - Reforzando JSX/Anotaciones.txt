@@ -1,0 +1,78 @@
+Cosas a tener en cuenta en JSX ->
+
+- Cerrar etiquetas de la forma correcta (considerar las de autocierre: img, input, etc)
+- Retornar un único elemento
+- Usar {} para código JS
+- Usar Camel Case
+
+Para traer elementos o recursos estáticos los puedo importar directamente desde JS
+import NOMBREVARIABLE from './PATH';
+
+Puedo iterar elementos dentro de los componentes utilizando JS
+<--Diferencia forEach vs Map-->
+forEach no devuelve nada, mientras que Map si (un array)
+ambos iteran
+map necesita un parámetro (letra, palabra, etc) para identificar el elemento
+
+// En el return del componente abro llaves para ejecutar código JS
+{
+    array.map((elemento) => <h1>{elemento.propiedad}</h1>) // Si quiero volver a utilizar JS abro corchetes para llamar a la variable o al dato al que quiera acceder
+}
+
+Si quiero agregar más de un elemento, debo recordar que siempre tengo que devolver un único elemento en la función por lo que hay varias opciones:
+- Lo meto todo dentro de una etiqueta complementaria <> </>
+- Lo meto todo dentro de un div con posibilidad de identicarlo con clases (o ID)
+
+Es importante atomizar nuestro código en diferentes componentes para que pueda ser lo más escalable posible
+Los componentes se pueden ubicar en src/components/ -- Estos componentes si o si deben retornar algo y se componen de la siguiente forma:
+
+function nombreComponente(){
+    CODIGO PREVIO AL JSX
+    return(
+        <>
+            CODIGO JSX
+        </>
+    );
+}
+
+
+export default nombreComponente;
+
+Los componentes pueden recibir props
+
+function nombreComponente(props){
+    return(
+        <>
+            <p>Mi nombre es {props.nombre}</p>    
+        </>
+    );
+}
+
+Aunque tambien podemos tomar los datos destructurizando con las llaves el elemento que nos llega
+
+function nombreComponente({nombre}){
+    return(
+        <>
+            <p>Mi nombre es {nombre}</p>    
+        </>
+    );
+}
+
+Siempre es importante mantener una estructura:
+- Clases CSS en inglés
+- La extensión del archivo componente debe empezar con mayúscula y utilizar la extensión .jsx
+
+Dentro de CSS puedo crear variables
+:root{
+   --nombreDeVariable: #fff;
+}
+
+Agregar colores principales, secundarios, fuentes a utilizar en repeditas ocaciones, etc es importante dejarlo ahí
+
+Luego la llamo de la siguiente forma:
+
+.elemento{
+    color: var(--nombreDeVariable);
+}
+
+Puedo importar paquetes de estilos como bootstrap o material-ui (entre otros) dandole uso a las CDN o con NPM y una importación en el index.js en vez del index HTML
