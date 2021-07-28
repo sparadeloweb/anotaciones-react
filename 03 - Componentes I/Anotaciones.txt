@@ -1,0 +1,146 @@
+Repaso clase anterior
+- Sugar Syntax: sintaxis agregada a un lenguaje de programación con el objetivo de hacer más fácil y eficiente su utilización. Favorece su escritura, lectura y comprensión.
+- Webpack: es un module bundler o empaquetador de módulos. Agarra modulos que están en lenguajes que no entiende el navegador para convertirlo en recursos que si lo hagan.
+- Eject: es una acción permanente que permite tener un control más específico del  bundling a costa de tener que mantenerlo.
+- Transpiling: es el proceso de convertir código escrito en un lenguaje, a su representación en otro lenguaje.
+- JSX: es una extensión de sintaxis de Javascript que se parece a HTML. Oficialmente, es una extensión que permite hacer llamadas a funciones y a construcción de objetos. No es un string ni HTML.
+
+# Componentes
+Las aplicaciones en React están construídas sobre componentes, por lo que se trabaja de una forma modular que aumenta el mantenimiento y escalabilidad de un proyecto.
+Los componentes se apoyaran entre ellos para crear la aplicación final.
+
+Ventajas ->
+- Separación de las responsabilidades, cada componente cumple su tarea.
+- La lógica de estado y los elementos visuales se encuentran separados, por lo que es más fácil reutilizar los componentes.
+- Se simplifica la tarea en pruebas unitarias.
+- Mejora el rendimiento.
+- Se vuelve más interpretable nuestra APP.
+
+En React, los componentes varían entre dos formas de entenderlos, según desde dónde se analicen:
+- Tipos de componentes
+- Patrones
+
+Tipos de componentes:
+
+Class based components -> Basados en clases (aunque es viejo, se sigue usando en ciertos proyectos)
+
+Siempre se importa React en el inicio:
+import React from 'react';
+import {Component} from 'react'; // Puedo hacer esto para evitar mencionar la clase siempre
+
+// Lo declaro
+class App extends React.Component {
+   render(){ // Tiene un render con un return dentro
+      return(
+          <></>
+      );
+   }
+}
+
+export default App; // Lo exporto para poder utilizar por fuera
+
+Existen ciclos de vida que puedo declarar antes del render para ejecutar codigo JS
+
+componentWillMount(){} // Voy a hacer render en el DOM, aun no estoy renderizado
+componentDidMount(){} // El componente fue montado, llamados a API´s externas, usar API´s del DOM o navegador. Se encuentra deprecado, no debe ser utilizado -> En su reemplazo se puede utilizar ->
+getSnapshotBeforeUpdate(){} // Alternativa similar a componentDidMount()
+componentDidUpdate(){} // El componente cambió, por lo general cambia su estado
+
+El estado se define de la siguiente forma:
+
+state = {
+    count: 0; // Podria ser definido por una prop enviada por un componente padre this.props.PROP
+};
+
+Puedo llamar dentro del componente a este estado: this.state.var // this.state.count
+
+Para cambiarlo debo usar setState({
+    var: nuevoValor // Cambio el valor del estado, no puedo ejecutar esto en el Update porque entra en loop/bucle
+});
+
+
+Ejemplo funciones con manipulado los states
+
+sumar = () => { // Defino la función sin const ya que estoy trabajando en una clase y con arrow functions
+ this.setState({
+     count: this.state.count + 1
+ });
+};
+
+Si no uso las arrow functions debo crear el constructor
+
+Para llamar la función en el JSX utilizo:
+onClick="{this.sumar}" // Le aclaro que es el método de este componente con this
+
+Para llamar a una propiedad como hijo se ejecuta: {this.props.PROPIEDAD}
+
+Function based components -> Basados en funciones
+const App = () => {
+    return (
+        <></>
+    );
+}
+
+Ambos tipos de componentes pueden recibir props (propiedades) y la limitación de hacer render de un único elemento
+
+Para llarmlo lo importo y luego creo el elemento en el JSX:
+<App/>
+
+# Propiedades de los componentes
+Las propiedades son la forma con la cúal React permite pasar parámettros de un componente superior a sus componentes hijos, implementa el flujo de datos unidireccional
+
+Si una propiedad es una función, el hijo puede llamarla para provocar efectos secundarios en el padre.
+
+Puedo recibir en el hijo estas propiedades utilizando la palabra reservada props.propiedadALlamar o usando la desestructuración:
+function nombreComponente(props){
+    return(
+        <>
+            <p>Mi nombre es {props.nombre}</p>    
+        </>
+    );
+}
+
+function nombreComponente({nombre}){
+    return(
+        <>
+            <p>Mi nombre es {nombre}</p>    
+        </>
+    );
+}
+
+# Patrones en componentes
+
+De presentación ->
+Se limitan a mostrar datos y tienen poca o nula lógica asociada a manipulación del estado (suelen ser llamados stateless).
+. Están orientados al aspecto visual
+. No tienen dependencia con fuentes de datos
+. Reciben callbacks por medio de props // Puedo pasarle una función del componente padre que modifique el estado, para que pueda usarla el hijo también
+. No tienen estado
+
+Su ventaja principal es la reutilización sin tener que volver a escribir el código una y otra vez.
+
+Podria ser un componente contador que reciba una propiedad count con un valor
+
+Contenedores ->
+Tienen como propósito encapsular a otros componentes y proporcionarles las propiedades que necesitan.
+Se encargan de modificar el estado de la aplicación para que el usuario vea el cambio en los datos (suelen ser llamados state components)
+. Orientados al funcionamiento de la aplicación
+. Contienen componentes de presentación y/u otros contenedores
+. Se comunican con las fuentes de datos
+. Tienen estado para representar el cambio en los datos
+Realizará las llamadas API´s externas y establecerá la lógica a realizar, en función sobre las acciones del usuario sobre la interfaz
+
+El será el encargado de inicializar los estados y pasarle el valor de count al hijo (de presentacion) para que los muestre
+
+# Childs
+
+Un componente puede recibir un componente hijo como prop
+<Padre>
+  <Hijo/>
+</Padre>
+
+Para llamar a los hijos utilizo {props.children} // Siempre se llamará de la misma forma
+
+Para pasarle una propiedad desde el padre al hijo, al momento de llamar al hijo simplemente le paso atributos "HTML" con sus valores
+<Mensaje texto="Hola, soy Santiago"/>
+
