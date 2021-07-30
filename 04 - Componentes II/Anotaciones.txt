@@ -1,0 +1,71 @@
+La anatomia de un componente esta comuesta por:
+- Propiedades
+- Estados
+- Ciclo de vida
+- DOM Sync (Se encarga React)
+
+Las props, pueden ser cualquier valor (comunes, funciones, componentes, children, valores inyecados por librerías)
+Para recibir una prop tipo children en el componente donde se llaman, utilizo props.children (luego de haber llamado a los props como parametros)
+
+El estado es la data que puedo ir acumulando en mi componente. En los componentes de clase queda guardado en la variable state (no hay que re-definirla)
+Para cambiar el estado que tiene mi componente utilizo el método setState
+this.setState({
+    valor: nuevoValor,
+});
+
+# Hooks
+
+Se introducen aproximadamente en 2019 (React 16.8), se introducen para simplificar la creación de componentes; surgen como una alternativa para trabajarlo solo con funciones.
+
+import React, {useState} from 'react'; // Llamo al hook para utilizar estados
+
+function CardComponentHooks(){ // Creo la función que retornará mi componente
+  const [nombreDeEstado, setNombreDeEstado] =  useState(valorInicial); // Creo, o llamo por primera vez al estado y a su función para modificarlo
+  const [nombreDeEstado2, setNombreDeEstado2] = useState('Hola');
+
+  return(
+     <h1>estado: {nombreDeEstado}</h1>
+     <button onClick={() => setNombreDeEstado(nuevoValor)}></button> // Para ejecutar una modificación, lo hago dentro de una arrow function así no se dispara al cargar
+  );
+}
+
+
+Puedo pasarle una función set a un componente ->
+<Button action={setCount(count + 1)}/>
+
+# Ciclos de vida en un function component
+import React, {useEffect} from 'react'; // Resumo todos los ciclos de vida en uno solo
+
+useEffect(() => {}, []); // Recibe como primer parametro una función, y como segundo parametro recibe un array con estados que si cambian su valor se disparará
+
+useEffect(() => {
+    console.log(`Count cambió: ${count}`);    
+}, [count]);
+
+
+Si no le paso nada al array es un componentDidMount ya que se ejecutará una sola vez, si no el se ejecutará cada vez que cambie el o los estados que le paso. También puedo recibir y vigilar props que me llegan de un componente padre.
+Puedo tener un useEffect para cada prop para tener lógicas de ejecución diferentes.
+
+Regla general de los hooks ->
+# Deben ser ejecutados siempre, no pueden estar dentro de un if o un ciclo que no se inicialice
+
+Regla de los State Hooks ->
+# El value es constante, no puedo hacer name = x; 
+const [name, setName] = useState('Santiago');
+# Se cambia al valor usando la función set del estado
+# No llamar a la función set entre la declaración del hook y el render
+
+Cuando React vuelve a renderizar ?
+_ Cambian las props
+_ Cambia el o los estados
+_ Con eventos que modifiquen los puntos previos
+
+# Ciclos de vida
+Estados por los que pasa el componente a lo largo de su existencia. En esta, el componente va pasando por diferentes "fases"
+No debemos bloquear el rendering con tareas pesadas y sincrónicas, en su defecto hay que usar tareas asincronas luego del mount.
+
+Se divide en 3 partes
+_ Montaje
+_ Actualización
+_ Desmontaje (Se elimina del DOM)
+
