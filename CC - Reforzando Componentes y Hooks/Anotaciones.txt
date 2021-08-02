@@ -1,0 +1,47 @@
+->Para utilizar hooks debo llamar al método useState de React
+import { useState } from 'react';
+
+->Para crear un estado y asignarle su función que nos permitirá modificarlo utilizamos
+const [nombreDeEstado, setnombreDeEstado] = useState();
+
+->Para llamar al estado dentro del JSX utilizamos
+<h1>{nombreDeEstado}</h1>
+
+->Para utilizar los ciclos de vida de mi componente utilizo
+import { useEffect} from 'react';
+
+->Para crear la función encargada de los ciclos de vida utilizo
+useEffect( () => {}, []);
+En el segundo parámetro de la función donde se debe ingresar un array, se cargarán como elementos que estados serán los encargados de volver a ejecutar esta función
+Si el array se encuentra vacío simplemente se ejecutará al iniciar al componente
+Su primer parámetro siempre será una función vacía
+
+Puedo asignar un estado llamado "loading" o algo similar, para mostrar un texto mientras está cargando
+
+
+const [loading, setLoading] = useState(false); // Le paso un valor por defecto al estado
+useEffect( () => {
+
+setLoading(true);
+
+    setLoading(true);
+    setTimeout( () => {
+        setLoading(false);
+    }, 3000 );
+
+}, []);
+
+
+if(loading){
+    return (
+        <>
+            <h1>Cargando....</h1>
+        </>
+    )
+}
+
+
+->Si tengo que definir variables que no sean funciones del componente o estados, lo hago previo a la función que retorna el componente
+Los estilos tambien se definen previo a la declaración del componente
+const styles = {};
+<h1 style={styles}></h1>
