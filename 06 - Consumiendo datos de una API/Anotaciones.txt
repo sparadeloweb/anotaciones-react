@@ -1,0 +1,98 @@
+# Repaso
+
+Existen 2 tipos de promesas extra
+Promise.all() // Resuelve todas las promesas y si una falla, falla la función entera
+Promise.race() // Resuelve la promesa que primero se termine de ejecutar
+
+Map: es un método que nos permite generar un nuevo array, tomando de base otro y utilizando una función transformadora
+
+# Paradigmas de intercambio de información
+
+La mayoría de aplicaciones pueden brindarle una experiencia propia en la app ya que se conecta a un conjunto de servicios de datos.
+Instagram, Twitter, etc se comunica con sus servidores o servidores externos para traer la información.
+
+Si no existe una conexión funciona OFFLINE por lo que no traerá ni mandará datos. Trabajará solo con lo que tiene guardado.
+
+A lo largo del tiempo mejores velocidades en internet permitirieron mejorar la transferencia de datos:
+- Velocidad de transferencia
+- Tolerancia a fallos
+- Seguridad
+
+Modelo Cliente - Servidor
+El cliente es quien consume la data y el servidor se la provee. También el cliente es capaz de enviar datos al servidor y este procesarlos.
+
+Modelo Push
+Si invertimos la lógica, se la conoce como PUSH:
+- El cliente se suscribe
+- El servidor elige el momento del inicio de la trasnferencia, y la envía a un servicio
+- El servicio se la envía al cliente
+
+Push nace para generar engagement, y lograr que los usuarios recuerden que nuestra app existe, y que puede proveerles información que se deba enviar desde el servidor.
+Es el socket que sirve para el real time.
+
+Modelo Polling
+Si no se utiliza push, debemos programar nuestro cliente para que consulte si cambio algo. El polling se refiere al cliente preguntando constantemente si el servidor tiene algo para enviarle.
+Sirve mucho para consultar y accionar en una APP. Es como un radar.
+
+# Requests via HTTP/S
+Ayudan a realizar una solicitud a un servidor y nos permiten establecer un protocolo de transferencia, el cual se encuentra definido por los siguientes elementos:
+- Dirección / URL
+- GET, POST, PUT, DELETE (PUT es para modificar algo y DELETE para eliminar)
+Se debe respetar el tipo de petición por buenas prácticas
+GET: Quiero obtener
+POST: Quiero crear
+PUT: Quiero crear o actualizar
+DELETE: Quiero eliminar
+
+# Query Params
+Es la data que mando incluida en la dirección, para indicarle al receptor parámetros que usará para accionar o tomar decisiones. Son datos menores o de seguridad baja que no hay problema en pasarlos por la URL.
+Se separa la URL de los parámetros agregando un signo de pregunta ?
+Cada parámetro se compone de de una key y un valor key=value&key2=value2
+Los parámetros se separan por un signo &
+
+# Body
+Se utiliza para transferir piezas de información entre el cliente y el servidor
+# Headers
+Se utilizan para:
+- Definir las respuestas soportadas, requeridas o preferidas
+- Agregar información extra: auth tokens, cookies, lenguaje preferido, si acepta contenido cacheado
+- Lo que quieras en forma de texto
+
+Se pueden leer desde la consola del navegador viendo la solicitud en "Network"
+
+# RESTFUL API
+Cuando se crea y provee un servicio basado y pensado en términos de recursos, y se respetan las convenciones de verbo/método y código de respuesta estamos frente a un diseño arquitectural de tipo REST.
+Aplico bien los verbos que HTTP me da. Usarlos proporcionara ventajas, que aunque no sean grandes dan mucha utilidad.
+Si además transferimos JavaScript o XML, es conocido como AJAX.
+
+# Fetch
+Es un método nativo de Javascript, me permite pedirle recursos a una API/Servidor. Como se utiliza ?
+La function recibe dos parámetros
+A) STRING: URL a la cúal apuntar
+B) OBJECT: Es un objeto con la configuración
+Bc) CONFIGURACIÓN: Le indíco que método voy a utilizar
+
+const response = fetch('https://url.com/get/', {
+   method: 'GET'
+});
+
+Para trabajar este dato asíncrono dentro de la función a utilizar, primero debo indicar que será una función asíncrona:
+const getCharacterFromApi = async () => {
+   const response = await fetch('https://url.com/get/', { // Siempre que usamos fetch le debemos decir que tendrá que hacer un AWAIT
+       method: 'GET'
+   });
+
+   const data = await response.json(); // Resuelvo la promesa
+
+   console.log("Respuesta", data);
+}
+
+Otro metodo dentro de la función fetch en su configuración es body, donde paso todos los datos que necesite enviar al servidor
+
+
+Para depurar errores, la función asíncrona debe estar dentro de un try catch
+
+También existe Axios pero es un paquete aparte a instalar.
+
+
+

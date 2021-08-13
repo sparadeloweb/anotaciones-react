@@ -1,0 +1,57 @@
+# Repaso
+
+Ciclo de Vida: serie de estados por los cuales pasa todo componente a lo largo de su existencia:
+
+-> componentWillMount()
+-> componentDidMount()
+-> componentWillReceiveProps()
+-> shouldComponentUpdate(nextProps, nextState)
+-> componentWillUpdate()
+-> componentDidUpdate()
+
+# Promise
+
+JS tiene una API que nos permite crear y ejecutar distintas operaciones o conjuntos de operaciones. Una promise, es un objeto que permite representar y seguir el ciclo de vida de una tarea/operación(función)
+
+Asincronismo -> A destiempo || JS seguirá el ejecutando el código esperando el error
+Los estados posibles por los que pasará una promesa son: PENDIENTE => (COMPLETADA||RECHAZADA)
+
+FrontEnd = Cliente = Aplicación de React
+BackEnd = Server = API
+
+El Front, consume datos del Back. En el servidor persistirán los datos y se comunicará con la DB.
+
+La diferencia, es que la tarea asíncrona no bloqueara toda la carga mientras espera la respuesta de una petición.
+
+# Código de una promesa
+
+Se declara con la palabra reservada: new Promise();
+Esta promesa recibirá 1 función que tendrá 2 parámetros:
+const var = new Promise( (resolve, reject) => {} ); // No pueden tener otros nombres estos parámetros
+Si el servidor responde correctamente, responderá con resolve, si no con reject
+
+Puedo llamar a:
+_ resolve()
+_ reject()
+
+Básicamente seria como indicarle a la promesa que hasta el resolve o reject llega el código y estas funciones van a devolver un dato como valor
+
+Para ejecutar la promesa y mostrar su verdadero valor y no su propiedad como promesa utilizo
+
+var.then((response) => {}).catch((error) => {});
+
+Cada una de esas funciones se encargarán de realizar una acción con la posibilidad de utilizar la respuesta (resolve) o el error (reject).
+
+En React, las promesas se ejecutan en el useEffect
+
+# Call Stack
+
+Pila de ejecución de JS, la pila el primero que entra es el último que sale mientras que la cola el primero que entra también saldrá primero
+
+CallStack indica que la función llamada en el código se debe ejecutar, leerá lo que tiene dentro y e irá ejecutando, de arriba a abajo, para leer una función lo hará y ejecutará todo lo que tiene dentro
+
+El setTimeout, es un caso diferente. Aunque tenga un tiempo de 0, JS sabe que es una tarea que consumirá tiempo por lo que lo manda a un Event Queue o Cola de Eventos que ejecutará al terminar las tareas sincrónicas o promesas
+
+El resolve de una promesa se ejecutará al finalizar las tareas sincrónicas
+
+
