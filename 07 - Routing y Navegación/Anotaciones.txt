@@ -1,0 +1,77 @@
+# Routering
+
+La navegación en nuestro sitio es un factor clave en términos de experiencia y escalabilidad. Si una página no posee navegación, se habla entonces de una landing page (o de una sola página).
+Nos permite:
+Desde el lado del usuario, entender dónde están parados y guardar marcadores en las secciones de interés
+Navegadores, permite controlar las acciones de ir adelante y volver, y conocer el historial de navegación
+Crawlers, entienden la estructura de la app y optimizan el acceso a las distintas secciones
+
+Ejemplo de Organización
+Inicio -> Busqueda -> Detalle -> Confirmación -> Fin
+
+El Routing se compone del servidor o dominio,
+
+/ : Inicio
+
+/category : Subsección, subpágina, etc
+
+/category/:id : Subsección de la subsección donde envío un parámetro dinámico
+
+
+La librería más famosa para manejar la navegación en React es llamada React Router
+https://reactrouter.com/
+
+Para instalar el paquete dentro de las dependencias de nuestro proyecto utilizamos en consola:
+
+npm install react-router-dom
+
+Este comando instala:
+- react-router
+- react-router-dom / react-router-native
+
+# Como utilizar el Router
+
+1 - IMPORTAR A TODA LA APP
+import { BrowserRouter, Switch, Route} from 'react-router-dom'
+
+2 - CREAR CARPETA PARA LAS PÁGINAS
+src/pages
+
+Dentro de esta carpeta se guardará todo lo grande, o diferentes secciones:
+
+Productos
+Noticias
+Contacto
+Carrito 
+
+EJEMPLOS
+
+Estas páginas también SON COMPONENTES
+
+3 - CONSTRUIR LA APP CON LAS RUTAS
+- BrowserRouter envuelve toda la aplicación
+- Switch proyecta las vistas en las que navegaremos
+- Route indicará que mostrar segúne l Path
+
+<BrowserRouter>
+   <Switch>
+       <Route path="/">
+           </ComponentePageAMostrar>
+       </Route>
+   </Switch>
+</BrowserRouter>
+
+Para navegar debo importar {Link} de react-router-dom
+Utilizo el contenido <Link to="/path">Texto</Link>
+
+Este componente Link remplazará a los anchor (<a></a>)
+
+Para que un elemento se quede fijo y no cambie deberá estar fuera del Switch
+
+Para pasar un parámetro, en el to utilizo template strings: 
+<Link to={`/user/${id}`}>Usuario {$id}</Link>
+
+Para recibir los parámetros utilizo el hook useParams de 'react-router-dom' y desestructuro el parámetro que necesito
+const {id} = useParams();
+
+

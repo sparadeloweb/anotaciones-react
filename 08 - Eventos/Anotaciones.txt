@@ -1,0 +1,42 @@
+# Eventos
+Un evento se puede ver como cualquier acción que un usuario puede desencadenar en nuestra aplicación o puede ser programado para que se realice cada cierto tiempo
+
+# Tipos de eventos
+
+- Eventos automáticos: se disparan con condiciones programadas, no desencadenado por el usuario. Ejemplo: "Todavía estás viendo ?" De Netflix.
+
+- Eventos manuales: todas las interacciones del usuario que producen algún tipo de respuesta o efecto secundario. Ejemplo: Submit en un formulario.
+
+# DOM Events
+Son las acciones que puedo realizar sobre mi DOM:
+- Dispositivo/acción: mouse, input, keyboard, wheel, focus, etc
+- Custom events: definir eventos propios.
+
+Evento de UI más conocido: click - onClick. Para dispararlo en JSX utilizo camelCase:
+<h1 onClick={() => alert('Hola')}>Hola</h1> Todos se ejecutan con una función de callback para evitar su inicio al cargar la página
+
+En JavaScript tradicional puedo agregarle a un elemento del DOM una acción utilizando:
+
+elemento.addEventListener("acción", () => {//función flecha o declarativa}); 
+
+Ejemplos:
+- click
+- resize
+- keydown
+
+El segundo parámetro de la función permite traer un parametro (event) o (e), que trae información sobre este mismo.
+
+DATO EXTRA: Para ejecutar algo cuando el componente se desmonte agrego un return () => {} en el useEffect
+
+Para eliminar una acción utilizo:
+
+elemento.removeEventListener("acción");
+
+Para los inputs tenemos diferentes tipos de acciones:
+
+- onChange={} // Va a recibir una función 
+const onChangeInput = (e) => {
+    console.log("Cambió el input");
+};
+
+Agarro el valor del input: event.target.value
