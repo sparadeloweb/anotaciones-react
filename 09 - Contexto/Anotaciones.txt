@@ -1,0 +1,44 @@
+# Contexto
+React funciona con un flujo de datos unidireccional, es decir vía props.. Hasta ahora..
+Se creó hace 1 año y medio o 2 aproximadamente, con la idea de poder tener un estado global de nuestro aplicación, pudiendoselo comunicar con varios componentes
+Ahorra tener que ir pasando prop de prop en prop
+
+El contexto saca todos los pasamanos intermedios, tengo un proveedor y un consumidor.
+Para crear un contexto, lo ideal es hacerlo en una carpeta context dentro de src:
+src/context/
+El archivo se llamará %DESC%Context.jsx
+
+En el archivo
+import { createContext } from 'react';
+
+export const %NOMBREARCHIVO% = createContext();
+
+Luego en la app lo importo
+import { %NOMBREARCHIVO% } from './context/%NOMBREARCHIVO%';
+Y le indico que componentes compartiran contexto
+<%NOMBREARCHIVO%.Provider value={%PROPIEDADAPASARLE}> // Estos providers son padres de las rutas tmb
+    <Hijo1/>
+    <Hijo2/>
+    <Hijo3/>
+</%NOMBREARCHIVO%.Provider>
+
+Para usarlo en cualquiera de los hijos llamo a useContext
+import { useContext } from 'react';
+import { %NOMBREARCHIVO% } from './context/%NOMBREARCHIVO%';
+
+const %VARIABLE% useContext(%NOMBREARCHIVOIMPORTADO%);
+
+Entonces... ->
+Permiten compartir un valor único cross-app
+Reducen el wrapper-hell (infierno de nesting)
+Pueden llevar objetos, listas, funciones etc
+
+Para cambiar un estado, ademas de pasar el estado puedo pasar el setState
+<%NOMBREARCHIVO%.Provider value={{estado, setEstado}}>
+
+NO SE DEBE ABUSAR DEL CONTEXTO, HAY QUE SABER CUANDO USAR PROPS
+
+# Tips
+Puedo tener múltiples contextos del mismo corriendo en una aplicación
+El valor provisto por el hook de contexto será el del parent
+Podemos reemplazar redux utilizando esta herramienta
